@@ -13,9 +13,11 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     return Scaffold(
       drawer: sidebarUser(id: '1'),
-      appBar: AppBar(title: Text("Welcome!!")),
+      appBar: AppBar(title: Text("Welcome ${args['username']}")),
       body: ListView(
         children: [
           Container(

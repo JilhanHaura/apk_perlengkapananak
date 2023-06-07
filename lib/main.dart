@@ -1,3 +1,4 @@
+import 'package:cobayangbaru/LOGIN/login.dart';
 import 'package:cobayangbaru/admin/AdminDashboard.dart';
 import 'package:cobayangbaru/dashboardScreen.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
         useMaterial3: true,
       ),
-      home: const DashboardScreen(),
+      // home: const DashboardScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => LoginPage(),
+        '/admin_home': (context) => AdminDashboard(),
+        '/customer_home': (context) => DashboardScreen(),
+      },
     );
   }
 }
