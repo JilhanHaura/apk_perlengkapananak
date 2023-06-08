@@ -20,7 +20,7 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: Text(''),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -131,9 +131,12 @@ class _SignupPageState extends State<SignupPage> {
                   onPressed: _isLoading ? null : _signup,
                   child: _isLoading
                       ? CircularProgressIndicator()
-                      : Text('Sign Up'),
+                      : Text(
+                          'Sign Up',
+                          style: TextStyle(color: Colors.white),
+                        ),
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 248, 154, 235),
+                    primary: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

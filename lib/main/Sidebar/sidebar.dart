@@ -31,13 +31,15 @@ class _sidebarUserState extends State<sidebarUser> {
 
   @override
   Widget build(BuildContext context) {
+    // final args =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text(data?['username'] ?? ''),
-            accountEmail: Text(data?['email'] ?? ''),
+            accountName: Text('customer'),
+            accountEmail: Text('customer@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(

@@ -41,7 +41,7 @@ class _AddFormProductState extends State<AddFormProduct> {
           // 'discount': discount,
         }).then((Response) => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => dataproduct()))
+                  MaterialPageRoute(builder: (context) => DataProduct()))
             });
       } catch (exc) {
         debugPrint(exc.toString());

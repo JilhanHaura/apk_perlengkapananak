@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(''),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
@@ -107,12 +107,12 @@ class _LoginPageState extends State<LoginPage> {
                       : Text(
                           'Login',
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                          ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 22,
+                              color: Colors.white),
                         ),
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 248, 154, 235),
+                    primary: Colors.amber,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                         "Register",
                         style: TextStyle(
                           fontSize: 15,
-                          color: Color.fromARGB(255, 248, 154, 235),
+                          color: Colors.amber,
                         ),
                       ),
                     ),

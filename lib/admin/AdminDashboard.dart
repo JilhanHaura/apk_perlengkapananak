@@ -11,13 +11,10 @@ class AdminDashboard extends StatefulWidget {
 class _AdminDashboardState extends State<AdminDashboard> {
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-
     return Scaffold(
         drawer: sidebarAdmin(),
         appBar: AppBar(
-          title: Text("Welcome ${args['username']}"),
+          title: Text("Welcome "),
         ),
         body: SafeArea(
           child: SingleChildScrollView(

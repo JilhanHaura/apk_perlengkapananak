@@ -5,12 +5,15 @@ import 'package:http/http.dart' as http;
 class DetailCart extends StatefulWidget {
   const DetailCart({Key? key, required this.id}) : super(key: key);
   final String id;
+
   @override
   State<DetailCart> createState() => _DetailCartState();
 }
 
 class _DetailCartState extends State<DetailCart> {
   Map<String, dynamic>? data;
+  var images = "";
+  var url = "https://jilhan.000webhostapp.com/uploads/";
 
   Future<void> getDataPesanan() async {
     var response = await http.get(Uri.parse(
@@ -18,7 +21,10 @@ class _DetailCartState extends State<DetailCart> {
     setState(() {
       data = jsonDecode(response.body);
     });
-    debugPrint("$data");
+    if (data != null && data!['image'] != null) {
+      images = url + data!['image'];
+      print(images);
+    }
   }
 
   @override
@@ -40,63 +46,62 @@ class _DetailCartState extends State<DetailCart> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'ID User: ${data?['id_user'] ?? ''}',
+                'ID User: ${(data?['id_user'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'ID Product: ${data?['id_product'] ?? ''}',
+                'ID Product: ${(data?['id_product'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Full Name: ${data?['fullname'] ?? ''}',
+                'Full Name: ${(data?['fullname'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Tanggal: ${data?['tanggal'] ?? ''}',
+                'Tanggal: ${(data?['tanggal'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Phone: ${data?['phone'] ?? ''}',
+                'Phone: ${(data?['phone'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Informasi: ${data?['informasi'] ?? ''}',
+                'Informasi: ${(data?['informasi'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Alamat: ${data?['alamat'] ?? ''}',
+                'Alamat: ${(data?['alamat'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text(
-                'image: ${data?['image'] ?? ''}',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              child: images.isNotEmpty
+                  ? Image.network(images, width: 250, height: 250)
+                  : Text('No image available'),
             ),
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'Kurir: ${data?['kurir'] ?? ''}',
+                'Kurir: ${(data?['kurir'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

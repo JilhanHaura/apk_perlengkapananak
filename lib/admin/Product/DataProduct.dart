@@ -7,14 +7,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class dataproduct extends StatefulWidget {
-  const dataproduct({super.key});
+class DataProduct extends StatefulWidget {
+  const DataProduct({super.key});
 
   @override
-  State<dataproduct> createState() => _dataproductState();
+  State<DataProduct> createState() => _DataProductState();
 }
 
-class _dataproductState extends State<dataproduct> {
+class _DataProductState extends State<DataProduct> {
   List product = [];
 
   void getdataproduct() async {

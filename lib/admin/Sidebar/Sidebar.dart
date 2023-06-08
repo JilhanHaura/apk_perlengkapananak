@@ -6,7 +6,7 @@ import 'package:cobayangbaru/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 
 class sidebarAdmin extends StatefulWidget {
-  const sidebarAdmin({super.key});
+  const sidebarAdmin({Key? key}) : super(key: key);
 
   @override
   State<sidebarAdmin> createState() => _sidebarAdminState();
@@ -15,14 +15,16 @@ class sidebarAdmin extends StatefulWidget {
 class _sidebarAdminState extends State<sidebarAdmin> {
   @override
   Widget build(BuildContext context) {
+    // final args =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     return Drawer(
       child: ListView(
         // Remove padding
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('JilhanHaura.com'),
-            accountEmail: Text('project3@gmail.com'),
+            accountName: Text('jilhan'),
+            accountEmail: Text('jilhan@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -50,7 +52,7 @@ class _sidebarAdminState extends State<sidebarAdmin> {
             title: Text('Product'),
             onTap: () => {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => dataproduct()))
+                  MaterialPageRoute(builder: (context) => const DataProduct()))
             },
           ),
           ListTile(

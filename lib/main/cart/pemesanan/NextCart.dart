@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:cobayangbaru/dashboardScreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:cobayangbaru/main/cart/cart.dart';
@@ -14,6 +15,10 @@ class NextCart extends StatefulWidget {
 }
 
 class _NextCartState extends State<NextCart> {
+  File? imagepath;
+  String? imagename;
+  String? imagedata;
+
   String? selectedKurir;
   final _formKey = GlobalKey<FormState>();
   String id_user = "";
@@ -23,7 +28,6 @@ class _NextCartState extends State<NextCart> {
   String phone = "";
   String informasi = "";
   String alamat = "";
-  String image = "";
   String kurir = "";
 
   Map<String, dynamic>? userData;
@@ -57,28 +61,30 @@ class _NextCartState extends State<NextCart> {
   }
 
   Future<void> onSubmit() async {
+    print('dubmit');
     final bool? isValid = _formKey.currentState?.validate();
-    if (isValid == true) {
-      String url = "https://jilhan.000webhostapp.com/addpesanan.php";
-      try {
-        await http.post(Uri.parse(url), body: {
-          'id_user': id_user,
-          'id_product': id_product,
-          'fullname': fullname,
-          'tanggal': _dateController.text,
-          'phone': phone,
-          'informasi': informasi,
-          'alamat': alamat,
-          'image': image,
-          'kurir': kurir
-        }).then((response) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const DashboardScreen()));
-        });
-      } catch (exc) {
-        debugPrint(exc.toString());
-      }
+    // if (isValid == true) {
+    String url = "https://jilhan.000webhostapp.com/addpesanan.php";
+    try {
+      await http.post(Uri.parse(url), body: {
+        'id_user': id_user,
+        'id_product': id_product,
+        'fullname': fullname,
+        'tanggal': _dateController.text,
+        'phone': phone,
+        'informasi': informasi,
+        'alamat': alamat,
+        'image': imagename,
+        'kurir': kurir,
+        'data': imagedata
+      }).then((response) {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const DashboardScreen()));
+      });
+    } catch (exc) {
+      debugPrint(exc.toString());
     }
+    // }
   }
 
   final TextEditingController _dateController = TextEditingController();
@@ -105,14 +111,20 @@ class _NextCartState extends State<NextCart> {
     super.dispose();
   }
 
+  ImagePicker imagePicker = ImagePicker();
+  bool isLoading = false;
+
   Future<void> _selectImage() async {
-    final pickedFile =
-        await ImagePicker().getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        image = pickedFile.path;
-      });
-    }
+    var getimage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      imagepath = File(getimage!.path);
+      imagename = getimage.path.split('/').last;
+      imagedata = base64.encode(imagepath!.readAsBytesSync());
+      print(imagepath);
+      print(imagename);
+      print(imagedata);
+    });
   }
 
   @override
@@ -373,7 +385,7 @@ class _NextCartState extends State<NextCart> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: _selectImage,
-              child: Text(image ?? 'Select an image'),
+              child: Text('Select an image'),
             ),
             const SizedBox(height: 16.0),
             DropdownButtonFormField<String>(
@@ -406,7 +418,9 @@ class _NextCartState extends State<NextCart> {
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: onSubmit,
+              onPressed: () {
+                onSubmit();
+              },
               child: const Text('Submit'),
             ),
           ],
