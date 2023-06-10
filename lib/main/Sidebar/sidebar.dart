@@ -71,16 +71,16 @@ class _sidebarUserState extends State<sidebarUser> {
             title: Text('Dashboard'),
             onTap: () {},
           ),
-          ListTile(
-            leading: Icon(Icons.ad_units),
-            title: Text('Akun'),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.ac_unit_outlined),
-            title: Text('Pemesanan'),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.ad_units),
+          //   title: Text('Akun'),
+          //   onTap: () {},
+          // ),
+          // ListTile(
+          //   leading: Icon(Icons.ac_unit_outlined),
+          //   title: Text('Pemesanan'),
+          //   onTap: () {},
+          // ),
           Divider(),
           ListTile(
             title: Text('Log Out'),
