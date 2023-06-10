@@ -4,6 +4,7 @@ import 'package:cobayangbaru/admin/Categorie/DataCategorie.dart';
 import 'package:cobayangbaru/admin/Product/DataProduct.dart';
 import 'package:cobayangbaru/dashboardScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class sidebarAdmin extends StatefulWidget {
   const sidebarAdmin({Key? key}) : super(key: key);
@@ -13,6 +14,17 @@ class sidebarAdmin extends StatefulWidget {
 }
 
 class _sidebarAdminState extends State<sidebarAdmin> {
+  Future<void> logout(BuildContext context) async {
+    final logoutUrl = 'https://jilhan.000webhostapp.com/logout.php';
+    await http.post(Uri.parse(logoutUrl));
+
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/', // Gunakan nama rute login yang sesuai
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final args =
@@ -90,6 +102,7 @@ class _sidebarAdminState extends State<sidebarAdmin> {
             title: Text('Log Out'),
             leading: Icon(Icons.exit_to_app),
             onTap: () => {
+              logout(context)
               // Navigator.push(
               //     context, MaterialPageRoute(builder: (context) => LoginPage()))
             },

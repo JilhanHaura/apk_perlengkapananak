@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cobayangbaru/LOGIN/login.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,6 +28,17 @@ class _sidebarUserState extends State<sidebarUser> {
   void initState() {
     super.initState();
     getUser();
+  }
+
+  Future<void> logout(BuildContext context) async {
+    final logoutUrl = 'https://jilhan.000webhostapp.com/logout.php';
+    await http.post(Uri.parse(logoutUrl));
+
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/', // Gunakan nama rute login yang sesuai
+      (route) => false,
+    );
   }
 
   @override
@@ -73,7 +85,9 @@ class _sidebarUserState extends State<sidebarUser> {
           ListTile(
             title: Text('Log Out'),
             leading: Icon(Icons.exit_to_app),
-            onTap: () {},
+            onTap: () {
+              logout(context);
+            },
           ),
         ],
       ),
