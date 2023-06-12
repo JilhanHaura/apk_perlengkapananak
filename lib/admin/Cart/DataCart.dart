@@ -16,7 +16,7 @@ class _DataCartState extends State<DataCart> {
   List user = [];
 
   void getDataUser() async {
-    String Url = "https://jilhan.000webhostapp.com/viewpemesanan.php";
+    String Url = "https://jilhan.000webhostapp.com/viewpesanan.php";
     var response = await http.get(Uri.parse(Url));
     setState(() {
       user = jsonDecode(response.body);

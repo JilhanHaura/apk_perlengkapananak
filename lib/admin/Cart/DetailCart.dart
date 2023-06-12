@@ -17,7 +17,7 @@ class _DetailCartState extends State<DetailCart> {
 
   Future<void> getDataPesanan() async {
     var response = await http.get(Uri.parse(
-        'https://jilhan.000webhostapp.com/getdetailpemesanan.php?id=${widget.id}'));
+        'https://jilhan.000webhostapp.com/getdetailPesanan.php?id=${widget.id}'));
     setState(() {
       data = jsonDecode(response.body);
     });
@@ -53,7 +53,7 @@ class _DetailCartState extends State<DetailCart> {
             Padding(
               padding: EdgeInsets.all(16.0),
               child: Text(
-                'ID Product: ${(data?['id_product'] ?? '') as String}',
+                'Tittle Product: ${(data?['title_product'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
@@ -102,6 +102,13 @@ class _DetailCartState extends State<DetailCart> {
               padding: EdgeInsets.all(16.0),
               child: Text(
                 'Kurir: ${(data?['kurir'] ?? '') as String}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                'quantity: ${(data?['quantity'] ?? '') as String}',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),

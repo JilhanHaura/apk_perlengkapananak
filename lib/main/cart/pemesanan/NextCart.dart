@@ -22,13 +22,15 @@ class _NextCartState extends State<NextCart> {
   String? selectedKurir;
   final _formKey = GlobalKey<FormState>();
   String id_user = "";
-  String id_product = "";
+  // String id_product = "";
   String fullname = "";
   String tanggal = "";
   String phone = "";
   String informasi = "";
   String alamat = "";
   String kurir = "";
+  String? quantity;
+  String? title;
 
   Map<String, dynamic>? userData;
   Map<String, dynamic>? productData;
@@ -55,7 +57,7 @@ class _NextCartState extends State<NextCart> {
         'https://jilhan.000webhostapp.com/getdetailproduct.php?id=${widget.id}'));
     setState(() {
       productData = jsonDecode(response.body);
-      id_product = productData?['id'];
+      title = productData?['id'];
     });
     debugPrint("$productData");
   }
@@ -64,11 +66,12 @@ class _NextCartState extends State<NextCart> {
     print('dubmit');
     final bool? isValid = _formKey.currentState?.validate();
     // if (isValid == true) {
-    String url = "https://jilhan.000webhostapp.com/addpesanan.php";
+    String url = "https://jilhan.000webhostapp.com/addpemesanan.php";
     try {
       await http.post(Uri.parse(url), body: {
         'id_user': id_user,
-        'id_product': id_product,
+        // 'id_product': id_product,
+        'title_product': title ?? '',
         'fullname': fullname,
         'tanggal': _dateController.text,
         'phone': phone,
@@ -76,7 +79,8 @@ class _NextCartState extends State<NextCart> {
         'alamat': alamat,
         'image': imagename,
         'kurir': kurir,
-        'data': imagedata
+        'data': imagedata,
+        'quantity': quantity ?? '',
       }).then((response) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const DashboardScreen()));
@@ -145,6 +149,8 @@ class _NextCartState extends State<NextCart> {
                     itemCount: cartProvider.itemCount,
                     itemBuilder: (context, index) {
                       final cartItem = cartProvider.cartItems[index];
+                      quantity = cartItem.quantity.toString();
+                      title = cartItem.title.toString();
                       return Row(
                         children: [
                           Container(
@@ -162,7 +168,7 @@ class _NextCartState extends State<NextCart> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  cartItem.title,
+                                  '${cartItem.title}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     color: Colors.black,

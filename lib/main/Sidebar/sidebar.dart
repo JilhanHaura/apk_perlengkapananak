@@ -85,8 +85,10 @@ class _sidebarUserState extends State<sidebarUser> {
           ListTile(
             title: Text('Log Out'),
             leading: Icon(Icons.exit_to_app),
-            onTap: () {
-              logout(context);
+            onTap: () => {
+              logout(context)
+              // Navigator.push(
+              //     context, MaterialPageRoute(builder: (context) => LoginPage()))
             },
           ),
         ],
